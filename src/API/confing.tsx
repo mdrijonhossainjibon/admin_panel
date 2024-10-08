@@ -1,5 +1,4 @@
-
-import './dev';
+ 
  
 import { Config } from './types';
 
@@ -14,9 +13,9 @@ export const defaultConfig: Config = {
 		walletUrl: '/api/v2/wallet',
 		referralUrl: '/api/v2/referral',
 		competitionUrl: '/api/v2/competition',
-		authUrl: '/api/v2/barong',
+		authUrl: 'https://api.mdrijonhossainjibonyt.xyz/api/v2/barong',
 		tradeUrl: '/api/v2/udonex',
-		applogicUrl: '/api/v2/applogic',
+		applogicUrl: 'https://api.mdrijonhossainjibonyt.xyz/api/v2/applogic',
 		rangerUrl: `wss://9003-mdrijonhossai-tradingui-izwvgfxqte6.ws-us106.gitpod.io/api/v2/ranger`,
 		holderUrl: '/api/v2/holder',
 		transactionUrl: '/api/v2/transaction',
@@ -84,9 +83,7 @@ declare global {
 		env: Config;
 	}
 }
-
-window.env = window.env || defaultConfig;
-Cryptobase.config = { ...window.env };
+ 
 //hot custome env
 Cryptobase.config.api.competitionUrl = Cryptobase.config.api.competitionUrl || '/api/v2/competition';
 Cryptobase.config.api.airdropUrl = Cryptobase.config.api.airdropUrl || '/api/v2/airdrop';
