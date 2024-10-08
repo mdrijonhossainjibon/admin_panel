@@ -3,7 +3,7 @@ interface AppConfig {
 }
 
 const prodConfig: AppConfig = {
-  API_URL:  `${window.location.protocol}//${window.location.host.replace('3000' , '5000')}`,
+  API_URL: 'https://api.mdrijonhossainjibonyt.xyz' // `${window.location.protocol}//${window.location.host.replace('3000' , '5000')}`,
 };
 
  
