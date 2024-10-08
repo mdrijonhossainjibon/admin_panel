@@ -3,8 +3,10 @@ import { combineReducers } from 'redux';
 
 import { all, call } from 'redux-saga/effects';
 import { publicReducer, usersReducer } from './app';
-import { adjustmentRoot, AdjustmentState, AlertState, devopsSaga, DevOpsState, LanguageState, rangerSaga, RangerState, rootalertsaga, TelegramUsersState, userlistSaga, UserListState } from './public';
+import { adjustmentRoot, TelegramRootSaga,  AdjustmentState, AlertState, devopsSaga, TelegramState,  DevOpsState, LanguageState, rangerSaga, RangerState, rootalertsaga, TelegramUsersState, userlistSaga, UserListState } from './public';
 import {   AuthState, rootactivitiesSaga, rootAuthSaga } from './users';
+ 
+ 
 
 
 
@@ -19,7 +21,8 @@ export function* rootSaga() {
         call(rangerSaga),
         call(rootactivitiesSaga),
         call(adjustmentRoot),
-        call(userlistSaga)
+        call(TelegramRootSaga),
+        call(userlistSaga),
     ])
 
 }
@@ -32,7 +35,8 @@ export interface RootState {
         ranger : RangerState;
         userlist : UserListState;
         adjustments :  AdjustmentState;
-        telegramUsers: TelegramUsersState  
+        telegramUsers: TelegramUsersState ;
+        Telegram : TelegramState;
     };
     users : {
         auth : AuthState

@@ -756,18 +756,6 @@ video {
   width: 100%;
 }
 
-.w-3 {
-  width: 0.75rem;
-}
-
-.w-30 {
-  width: 7.5rem;
-}
-
-.w-40 {
-  width: 10rem;
-}
-
 .max-w-\[70\%\] {
   max-width: 70%;
 }
@@ -820,14 +808,6 @@ video {
 
 .justify-center {
   justify-content: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.justify-around {
-  justify-content: space-around;
 }
 
 .gap-3 {

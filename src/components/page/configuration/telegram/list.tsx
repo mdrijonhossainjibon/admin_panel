@@ -1,134 +1,82 @@
 import {   Table,  Tag,  Card,    Switch,   Space,   Button, Modal, Select, Tabs, Input } from "antd";
-import { useState } from "react";
-import {   SettingOutlined,  RobotOutlined,  KeyOutlined } from "@ant-design/icons"; // Importing icons
+import { useEffect, useState } from "react";
+import {   SettingOutlined,  RobotOutlined,  KeyOutlined, DeleteOutlined } from "@ant-design/icons"; // Importing icons
+import { ChannelConfig, deleteChannelConfigRequest, fetchBotConfigRequest, fetchChannelConfigRequest, putBotConfigRequest, putChannelConfigRequest, RootState } from "modules";
+import { useDispatch, useSelector } from "react-redux";
+import { t } from "i18next";
 
 // Define types for the channel and bot data
-interface Channel {
-    key: string;
-    username: string;
-    channelUrls: string;
-    role: "admin" | "user"; // Role can be either 'admin' or 'user'
-    status: "active" | "deactive"; // Status can be 'active' or 'deactive'
-}
+ 
 
 interface Bot {
     key: string;
     status: "on" | "off"; // Bot status
     withdraw: "enabled" | "disabled"; // Withdraw status
-    apiKey: string; // API Key
+    token : string; // API Key
 }
 
-const initialChannels: Channel[] = [
-    {
-        key: "1",
-        username: "ChannelUser1",
-        channelUrls: "https://t.me/channel1",
-        role: "admin",
-        status: "active",
-    },
-    {
-        key: "2",
-        username: "ChannelUser2",
-        channelUrls: "https://t.me/channel2",
-        role: "user",
-        status: "deactive",
-    },
-    {
-        key: "3",
-        username: "ChannelUser3",
-        channelUrls: "https://t.me/channel3",
-        role: "user",
-        status: "deactive",
-    },
-];
+ 
 
-// Sample data for bot configurations
-const initialBots: Bot[] = [
-    {
-        key: "1",
-        status: "on",
-        withdraw: "enabled",
-        apiKey: "API-KEY-123",
-    },
-
-];
+ 
 
 
 export default function List() {
-    const [channels, setChannels] = useState<Channel[]>(initialChannels); // State for the list of channels
-    const [bots, setBots] = useState<Bot[]>(initialBots); // State for bot settings
+   
+     
     const [showOnlyAdmins, setShowOnlyAdmins] = useState<boolean>(false); // State for toggling admin-only view
     const [showModal, setShowModal] = useState<boolean>(false); // Modal visibility state for removing a channel
     const [showApiKeyModal, setShowApiKeyModal] = useState<boolean>(false); // Modal visibility state for managing API keys
-    const [channelToRemove, setChannelToRemove] = useState<Channel | null>(null); // State for the channel to be removed
+    const [channelToRemove, setChannelToRemove] = useState< ChannelConfig | null>(null); // State for the channel to be removed
     const [apiKeyToManage, setApiKeyToManage] = useState<Bot | null>(null); // State for the bot whose API key is managed
     const [newApiKey, setNewApiKey] = useState<string>(""); // State for the new API key input
+    
+    const dispatch = useDispatch();
+    useEffect(() =>{
+            dispatch(fetchChannelConfigRequest());
+            dispatch(fetchBotConfigRequest());
+    } , [ dispatch ])
 
+
+    const {  channelConfig   , loading , botConfig  } = useSelector((state: RootState) => state.public.Telegram);
+
+  
     // Sample data for channels
-
-
+   
 
     // Handle modal visibility and setting the selected channel for removal
-    const openModal = (channel: Channel): void => {
+    const openModal = (channel:  ChannelConfig): void => {
         setChannelToRemove(channel);
         setShowModal(true);
     };
 
     // Handle the removal of a channel
     const handleRemove = (): void => {
-        setChannels((prevChannels) =>
-            prevChannels.filter((channel) => channel.key !== channelToRemove?.key)
-        );
+        dispatch( deleteChannelConfigRequest({ username : channelToRemove?.username }));
         setShowModal(false);
     };
 
     // Toggle the channel status
-    const toggleStatus = (key: string): void => {
-        setChannels((prevChannels) =>
-            prevChannels.map((channel) =>
-                channel.key === key
-                    ? {
-                        ...channel,
-                        status: channel.status === "active" ? "deactive" : "active",
-                    }
-                    : channel
-            )
-        );
+    const toggleStatus = ({ username , status   }: ChannelConfig): void => {
+        dispatch(putChannelConfigRequest({ username , status : status === 'active' ?  'deactive' : 'active'   }))
     };
 
     // Change the role of the channel
-    const changeRole = (key: string, newRole: "admin" | "user"): void => {
-        setChannels((prevChannels) =>
-            prevChannels.map((channel) =>
-                channel.key === key ? { ...channel, role: newRole } : channel
-            )
-        );
+    const changeRole = (username: string, role: "admin" | "member"): void => {
+        dispatch(putChannelConfigRequest({ username ,  role }))
     };
 
     // Toggle bot status (On/Off)
-    const toggleBotStatus = (key: string): void => {
-        setBots((prevBots) =>
-            prevBots.map((bot) =>
-                bot.key === key ? { ...bot, status: bot.status === "on" ? "off" : "on" } : bot
-            )
-        );
+    const toggleBotStatus = (toggle_bot : any): void => {
+       dispatch(putBotConfigRequest({ toggle_bot :  toggle_bot === 'on' ? 'off' : 'on' }))
     };
 
     // Toggle withdraw (Enable/Disable)
-    const toggleWithdraw = (key: string): void => {
-        setBots((prevBots) =>
-            prevBots.map((bot) =>
-                bot.key === key
-                    ? { ...bot, withdraw: bot.withdraw === "enabled" ? "disabled" : "enabled" }
-                    : bot
-            )
-        );
+    const toggleWithdraw = (withdraw :any): void => {
+          dispatch(putBotConfigRequest({ withdraw :   withdraw === 'disabled' ? 'enabled' : 'disabled' }))
     };
 
     // Filter channels based on the "Show Only Admins" switch
-    const filteredChannels = showOnlyAdmins
-        ? channels.filter((channel) => channel.role === "admin") // Show only admins
-        : channels;
+    const filteredChannels = showOnlyAdmins  ? channelConfig.filter((channel) => channel.role === "admin")  : channelConfig;
 
     // Define the columns for the Ant Design table for channels
     const channelColumns = [
@@ -139,7 +87,7 @@ export default function List() {
         },
         {
             title: "Channel URL",
-            dataIndex: "channelUrls",
+            dataIndex: "channelurl",
             key: "channelUrls",
             render: (text: string) => <a href={text}>{text}</a>,
         },
@@ -147,41 +95,44 @@ export default function List() {
             title: "Status",
             dataIndex: "status",
             key: "status",
-            render: (status: "active" | "deactive", record: Channel) => (
-                <Space>
-                    <Tag color={status === "active" ? "green" : "red"}>{status}</Tag>
+            render: (status: "active" | "deactive", record:  ChannelConfig) => (
+               
+                    
                     <Switch
                         checked={status === "active"}
-                        onChange={() => toggleStatus(record.key)}
+                        onChange={() => toggleStatus(record)}
                         checkedChildren="Active"
                         unCheckedChildren="Deactive"
                     />
-                </Space>
+               
             ),
         },
         {
             title: "Role",
             dataIndex: "role",
             key: "role",
-            render: (role: "admin" | "user", record: Channel) => (
+            render: (role: "admin" | "member", record:  ChannelConfig) => (
                 <Select
                     defaultValue={role}
-                    onChange={(value) => changeRole(record.key, value)}
+                    onChange={(value) => changeRole(record.username, value)}
                     style={{ width: 120 }}
                 >
                     <Select.Option value="admin">Admin</Select.Option>
-                    <Select.Option value="user">User</Select.Option>
+                    <Select.Option value="member">Member</Select.Option>
                 </Select>
             ),
+        },
+        {   title : 'Created_At',
+            dataIndex : 'created_at'
         },
         {
             title: "Actions",
             key: "actions",
-            render: (text: string, record: Channel) => (
+            
+            render: (text: string, record:  ChannelConfig) => (
                 <Space size="middle">
-                    <Button onClick={() => openModal(record)} danger>
-                        Remove
-                    </Button>
+                     <Button icon={ <DeleteOutlined  size={ 55 }   /> }   onClick={() => openModal(record)}     danger> Delete  </Button>
+                     
                 </Space>
             ),
         },
@@ -191,12 +142,13 @@ export default function List() {
     const botColumns = [
         {
             title: "Bot Status",
-            dataIndex: "status",
-            key: "status",
+            dataIndex: "toggle_bot",
+            key: "toggle_bot",
             render: (status: "on" | "off", record: Bot) => (
                 <Switch
+                loading={ loading }
                     checked={status === "on"}
-                    onChange={() => toggleBotStatus(record.key)}
+                    onChange={() => toggleBotStatus(status)}
                     checkedChildren="On"
                     unCheckedChildren="Off"
                 />
@@ -209,7 +161,7 @@ export default function List() {
             render: (withdraw: "enabled" | "disabled", record: Bot) => (
                 <Switch
                     checked={withdraw === "enabled"}
-                    onChange={() => toggleWithdraw(record.key)}
+                    onChange={() => toggleWithdraw(withdraw)}
                     checkedChildren="Enabled"
                     unCheckedChildren="Disabled"
                 />
@@ -217,7 +169,7 @@ export default function List() {
         },
         {
             title: "API Key",
-            dataIndex: "apiKey",
+            dataIndex: "token",
             key: "apiKey",
             render: (apiKey: string, record: Bot) => (
                 <Space>
@@ -237,20 +189,15 @@ export default function List() {
     // Open the Manage API Key modal
     const openApiKeyModal = (bot: Bot): void => {
         setApiKeyToManage(bot);
-        setNewApiKey(bot.apiKey); // Set the current API key to the input
+        setNewApiKey(bot.key); // Set the current API key to the input
         setShowApiKeyModal(true);
+        
     };
 
     // Handle adding a new API key
     const handleAddApiKey = (): void => {
         if (apiKeyToManage) {
-            setBots((prevBots) =>
-                prevBots.map((bot) =>
-                    bot.key === apiKeyToManage.key
-                        ? { ...bot, apiKey: newApiKey } // Update the API key
-                        : bot
-                )
-            );
+            dispatch(putBotConfigRequest({ token : newApiKey }))
             setShowApiKeyModal(false);
             setNewApiKey(""); // Clear the input
         }
@@ -269,7 +216,7 @@ export default function List() {
     );
 
     return (
-        <Card title="Telegram Channel and Bot Configuration">
+        <Card title={ t('setter.layouts.configurations.nav.tgc_L')}>
             <Tabs defaultActiveKey="1">
                 <Tabs.TabPane
                     tab={
@@ -291,10 +238,11 @@ export default function List() {
                         pagination={false}
                         columns={channelColumns}
                         dataSource={filteredChannels}
+                        loading={ loading }
                     />
                     <Modal
                         title="Confirm Remove"
-                        visible={showModal}
+                        open={showModal}
                         onOk={handleRemove}
                         onCancel={() => setShowModal(false)}
                     >
@@ -315,11 +263,12 @@ export default function List() {
                     <Table
                         pagination={false}
                         columns={botColumns}
-                        dataSource={bots}
+                        dataSource={ [ botConfig as any ]}
+                        loading={ loading }
                     />
                     <Modal
                         title="Manage API Key"
-                        visible={showApiKeyModal}
+                        open={showApiKeyModal}
                         onOk={handleAddApiKey}
                         onCancel={() => setShowApiKeyModal(false)}
                     >

@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { alertReducer, changeLanguageReducer, devopsReducer, rangerReducer, userListReducer , adjustmentReducer, telegramUsersReducer  } from './public';
+import { alertReducer, changeLanguageReducer, devopsReducer, rangerReducer, userListReducer , adjustmentReducer, telegramUsersReducer, TelegramReducer  } from './public';
 import { activitiesReducer, authReducer } from "./users";
  
 
@@ -12,7 +12,8 @@ export const publicReducer = combineReducers({
     ranger : rangerReducer,
     userlist : userListReducer,
     telegramUsers: telegramUsersReducer,
-    adjustments: adjustmentReducer
+    adjustments: adjustmentReducer,
+    Telegram : TelegramReducer
 
 });
 

@@ -774,7 +774,8 @@
           "wallets": "Wallets",
           "markets": "Markets",
           "feesSchedule": "Fees Schedule",
-          "tgc" : "Telegram Config" 
+          "tgc" : "Telegram Config" ,
+          "tgc_L" : "Telegram Channel and Bot Configuration"
         },
         "blockchains": {
           "details": {

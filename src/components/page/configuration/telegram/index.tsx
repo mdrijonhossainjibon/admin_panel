@@ -1,59 +1,73 @@
 import { Card, Table, Switch, Input, Button, Space, Tag } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import {   deleteChannelConfigRequest, fetchBotConfigRequest, fetchChannelConfigRequest, putBotConfigRequest, putChannelConfigRequest, RootState } from "modules";
 
 export default function Telegram_Config() {
   const [botStatus, setBotStatus] = useState(false);
   const [withdrawStatus, setWithdrawStatus] = useState(false);
-  const [channelUsernames, setChannelUsernames] = useState<string[]>([]);
+   
   const [newUsername, setNewUsername] = useState("");
-  const [channelUrls, setChannelUrls] = useState<string[]>([]);
-  const [newUrl, setNewUrl] = useState("");
-  const [apiKeys, setApiKeys] = useState<string>("");
+  
+   
+   
   const [newApiKey, setNewApiKey] = useState("");
 
-  // Add a new channel username to the list
+  const dispatch = useDispatch();
+
+  const { botConfig, loading } = useSelector((state: RootState) => state.public.Telegram);
+   const tg_group: any = botConfig.tg_group;
+   const channelUsernames : any[] = tg_group.username
+  useEffect(() => {
+    dispatch(fetchBotConfigRequest())
+    dispatch(fetchChannelConfigRequest())
+  }, [dispatch])
+
+
+  useEffect(() => {
+    if (botConfig) {
+      setBotStatus(botConfig.toggle_bot === 'on');
+      setWithdrawStatus(botConfig.withdraw === 'enabled');
+      setNewApiKey(botConfig.token);
+    }
+  }, [botConfig])
+
   const addChannelUsername = () => {
     if (newUsername && !channelUsernames.includes(newUsername)) {
-      setChannelUsernames([...channelUsernames, newUsername]);
-      setNewUsername(""); // Clear input after adding
+      //setChannelUsernames([...channelUsernames, newUsername]);
     }
+    dispatch(putChannelConfigRequest({ username : newUsername }));
   };
 
   // Remove a username from the list
   const removeChannelUsername = (username: string) => {
-    setChannelUsernames(channelUsernames.filter((item) => item !== username));
+    dispatch(deleteChannelConfigRequest({ username }));
   };
 
-  // Add a new channel URL to the list
-  const addChannelUrl = () => {
-    if (newUrl && !channelUrls.includes(newUrl)) {
-      setChannelUrls([...channelUrls, newUrl]);
-      setNewUrl(""); // Clear input after adding
-    }
-  };
-
-  // Remove a URL from the list
-  const removeChannelUrl = (url: string) => {
-    setChannelUrls(channelUrls.filter((item) => item !== url));
-  };
+  
+ 
 
   // Add a new API key
   const addApiKey = () => {
-    setApiKeys(newApiKey);
     setNewApiKey(""); // Clear input after adding
+    dispatch(putBotConfigRequest({ token : newApiKey }));
   };
 
 
-  const handleSave = () => {
-    // Save configuration logic (e.g., API call to update settings)
-    console.log({   toggle_bot  : botStatus ? 'on' : 'off' ,   withdraw : withdrawStatus ? 'enabled' : 'disabled', apiKeys,
-      tg_group: channelUsernames.map((username, index) => ({
-        username,
-        channel: channelUrls[index] || "",
-      })),
-    });
-  };
+   
+
+  
+  const handelBotStatus = (checked : boolean ) =>{
+     setBotStatus(checked);
+     dispatch(putBotConfigRequest({ toggle_bot :  checked ? 'on' : 'off' }))
+  }
+
+  const handelWithdrawStatus = (checked : boolean ) =>{
+    setWithdrawStatus(checked)
+    dispatch(putBotConfigRequest({ withdraw :  checked ? 'enabled' : 'disabled' }))
+ }
+
 
   const dataSource = [
     {
@@ -62,7 +76,7 @@ export default function Telegram_Config() {
       action: (
         <Switch
           checked={botStatus}
-          onChange={(checked) => setBotStatus(checked)}
+          onChange={ handelBotStatus }
         />
       ),
     },
@@ -72,7 +86,7 @@ export default function Telegram_Config() {
       action: (
         <Switch
           checked={withdrawStatus}
-          onChange={(checked) => setWithdrawStatus(checked)}
+          onChange={ handelWithdrawStatus }
         />
       ),
     },
@@ -96,7 +110,7 @@ export default function Telegram_Config() {
               Add Username
             </Button>
             <div>
-              {channelUsernames.map((username) => (
+              {channelUsernames?.map((username) => (
                 <Tag
                   key={username}
                   closable
@@ -111,66 +125,24 @@ export default function Telegram_Config() {
         </div>
       ),
     },
-    {
-      key: "4",
-      setting: "Channel URLs",
-      action: (
-        <div>
-          <Space direction="vertical" style={{ width: "100%" }}>
-            <Input
-              placeholder="Enter channel URL"
-              value={newUrl}
-              onChange={(e) => setNewUrl(e.target.value)}
-              onPressEnter={addChannelUrl} // Add when pressing Enter
-            />
-            <Button
-              type="dashed"
-              onClick={addChannelUrl}
-              icon={<PlusOutlined />}
-            >
-              Add URL
-            </Button>
-            <div>
-              {channelUrls.map((url) => (
-                <Tag
-                  key={url}
-                  closable
-                  onClose={() => removeChannelUrl(url)}
-                  style={{ marginBottom: 8 }}
-                >
-                  {url}
-                </Tag>
-              ))}
-            </div>
-          </Space>
-        </div>
-      ),
-    },
+     
     {
       key: "5",
       setting: "API Keys",
       action: (
         <div className="flex gap-3">
           <Input
+            disabled={ botConfig.token ? true : false }
             placeholder="Enter new API key"
             value={newApiKey}
             onChange={(e) => setNewApiKey(e.target.value)}
             onPressEnter={addApiKey} // Add when pressing Enter
-            className="w-140"
+            
           />
-          <CloseCircleOutlined onClick={() => setNewApiKey("")} />
+         {  botConfig.token ? null : <CloseCircleOutlined onClick={() => setNewApiKey("")} />   }
         </div>
       ),
-    },
-    {
-      key: "6",
-      setting: "",
-      action: (
-        <Button type="primary" onClick={handleSave}>
-          Save Settings
-        </Button>
-      ),
-    },
+    } 
   ];
 
   const columns = [
@@ -190,7 +162,7 @@ export default function Telegram_Config() {
 
   return (
     <Card title="Telegram Bot Configuration">
-      <Table dataSource={dataSource} columns={columns} pagination={false} />
+      <Table loading={loading} dataSource={dataSource} columns={columns} pagination={false} />
     </Card>
   );
 }

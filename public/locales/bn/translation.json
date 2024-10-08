@@ -774,11 +774,13 @@
       },
       "configurations": {
         "nav": {
-          "blockchains": "Blockchains",
-          "currencies": "Currencies",
-          "wallets": "Wallets",
-          "markets": "Markets",
-          "feesSchedule": "Fees Schedule"
+          "blockchains": "ব্লকচেইন",
+          "currencies": "মুদ্রা",
+          "wallets": "ওয়ালেট",
+          "markets": "বাজার",
+          "feesSchedule": "ফি শিডিউল",
+          "tgc" : "টেলিগ্রাম কনফিগারেশন" ,
+          "tgc_L" : "টেলিগ্রাম চ্যানেল এবং বট কনফিগারেশন"
         },
         "blockchains": {
           "details": {
