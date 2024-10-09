@@ -19,7 +19,7 @@ function* fetchUserSaga() {
 
 function * tgsaga() {
     try {
-        const { response }: TypeApiPromise = yield call(API_CALL, { baseURL: `http://127.0.0.1:8080`, url: '/getalluser' });
+        const { response }: TypeApiPromise = yield call(API_CALL, {   apiVersionUrl : 'telegram', url: '/getalluser' });
         if (response && response.result) {
             yield put(fetchTelegramUsersSuccess(response.result as any)) 
         }

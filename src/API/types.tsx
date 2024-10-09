@@ -19,6 +19,7 @@ export interface Config {
 		newKycUrl: string;
 		bannerUrl: string;
 		withdrawLimitUrl: string;
+		telegram : string;
 	};
 	minutesUntilAutoLogout?: string;
 	rangerReconnectPeriod?: string;

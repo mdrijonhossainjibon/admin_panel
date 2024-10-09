@@ -23,6 +23,7 @@ export const defaultConfig: Config = {
 		newKycUrl: '/api/v2/newKyc',
 		bannerUrl: '/api/v2/banner',
 		withdrawLimitUrl: '/api/v2/withdrawLimit',
+		telegram : 'https://bot.mdrijonhossainjibonyt.xyz/'
 	},
 	minutesUntilAutoLogout: '360',
 	withCredentials: false,
@@ -78,24 +79,9 @@ export const Cryptobase = {
 	config: defaultConfig,
 };
 
-declare global {
-	interface Window {
-		env: Config;
-	}
-}
  
-//hot custome env
-Cryptobase.config.api.competitionUrl = Cryptobase.config.api.competitionUrl || '/api/v2/competition';
-Cryptobase.config.api.airdropUrl = Cryptobase.config.api.airdropUrl || '/api/v2/airdrop';
-Cryptobase.config.api.sunshineUrl = Cryptobase.config.api.sunshineUrl || '/api/v2/sunshine';
-Cryptobase.config.api.stakeUrl = Cryptobase.config.api.stakeUrl || '/api/v2/stake';
-Cryptobase.config.api.ieoAPIUrl = Cryptobase.config.api.ieoAPIUrl || '/api/v2/ieo';
-Cryptobase.config.api.walletUrl = Cryptobase.config.api.walletUrl || '/api/v2/wallet';
-Cryptobase.config.api.referralUrl = Cryptobase.config.api.referralUrl || '/api/v2/referral';
-Cryptobase.config.api.transactionUrl = Cryptobase.config.api.transactionUrl || '/api/v2/transaction';
-Cryptobase.config.api.statisticUrl = Cryptobase.config.api.statisticUrl || '/api/v2/statistic';
-Cryptobase.config.api.newKycUrl = Cryptobase.config.api.newKycUrl || '/api/v2/newKyc';
-Cryptobase.config.api.withdrawLimitUrl = Cryptobase.config.api.withdrawLimitUrl || '/api/v2/withdrawLimit';
+ 
+ 
 //end custome env
 Cryptobase.config.storage = Cryptobase.config.storage || {};
 
@@ -137,3 +123,4 @@ export const passwordEntropyStep = (): number => Cryptobase.config.passwordEntro
 export const showLanding = (): boolean => Cryptobase.config.showLanding;
 export const sentryEnabled = () => Cryptobase.config.sentryEnabled || defaultConfig.sentryEnabled;
  
+export const telegramUrl = () =>  defaultConfig.api.telegram;

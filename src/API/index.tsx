@@ -20,6 +20,7 @@ import {
   newKycUrl,
   bannerUrl,
   withdrawLimitUrl,
+  telegramUrl
 } from './confing';
 
 
@@ -53,6 +54,7 @@ export interface RequestOptions {
   | 'competition'
   | 'newKyc'
   | 'banner'
+  | 'telegram'
   | 'withdrawLimit';
 }
 
@@ -150,6 +152,7 @@ const getAPI = () => ({
   newKyc: newKycUrl(),
   banner: bannerUrl(),
   withdrawLimit: withdrawLimitUrl(),
+  telegram  : telegramUrl()
 });
 
 

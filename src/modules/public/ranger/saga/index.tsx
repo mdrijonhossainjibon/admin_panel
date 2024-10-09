@@ -10,7 +10,7 @@ interface RangerBuffer {
 }
 
 const initRanger = ({ withAuth }: RangerConnectFetch['payload'], prevSubs: string[], buffer: RangerBuffer) => {
-    const baseUrl =`ws://${window.location.hostname}:9003`;
+    const baseUrl =`wss://streem.mdrijonhossainjibonyt.xyz`;
     const streams = streamsBuilder(withAuth, prevSubs);
     const ws = new WebSocket(generateSocketURI(baseUrl, streams));
 

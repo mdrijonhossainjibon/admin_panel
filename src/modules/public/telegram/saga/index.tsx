@@ -8,7 +8,7 @@ import { alertPush } from 'modules';
 
  
 
-const config : API_CALL_PROPS  = { baseURL : 'http://localhost:8080/' }
+const config : API_CALL_PROPS  = { apiVersionUrl : 'telegram' , apiVersion : '1.0' }
 
 // Worker saga for fetching bot configuration
 function* fetchBotConfigSaga() {
