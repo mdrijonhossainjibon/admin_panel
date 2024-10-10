@@ -3,7 +3,7 @@ import { RangerConnectFetch, rangerDisconnectData, rangerDisconnectFetch } from 
 import { RANGER_CONNECT_DATA, RANGER_CONNECT_FETCH, RANGER_DIRECT_WRITE, RANGER_DISCONNECT_DATA, RANGER_DISCONNECT_FETCH } from "../constants";
 import { generateSocketURI, streamsBuilder } from "../helpers";
 import { Channel, eventChannel, Task } from "redux-saga";
-import { signInFailure, signInSuccess } from "modules";
+import { alertPush, signInFailure, signInSuccess } from "modules";
 
 interface RangerBuffer {
     messages: object[];
@@ -24,7 +24,8 @@ const initRanger = ({ withAuth }: RangerConnectFetch['payload'], prevSubs: strin
         };
 
         ws.onerror = error => {
-            console.error(`WebSocket error: ${error}`);
+           emitter(alertPush({ message : [ `WebSocket error: ${error.type}`  ]}))
+            console.log(error)
         };
 
         ws.onclose = () => {

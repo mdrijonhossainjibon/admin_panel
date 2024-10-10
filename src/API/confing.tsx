@@ -14,7 +14,7 @@ export const defaultConfig: Config = {
 		referralUrl: '/api/v2/referral',
 		competitionUrl: '/api/v2/competition',
 		authUrl: 'https://api.mdrijonhossainjibonyt.xyz/api/v2/barong',
-		tradeUrl: '/api/v2/udonex',
+		tradeUrl: 'https://api.mdrijonhossainjibonyt.xyz/api/v2/',
 		applogicUrl: 'https://api.mdrijonhossainjibonyt.xyz/api/v2/applogic',
 		rangerUrl: `wss://9003-mdrijonhossai-tradingui-izwvgfxqte6.ws-us106.gitpod.io/api/v2/ranger`,
 		holderUrl: '/api/v2/holder',

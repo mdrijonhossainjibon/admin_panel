@@ -1,21 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, Button, Layout, Menu, Space, Switch, Dropdown } from "antd";
-import {
-  ApiOutlined,
-  PoweroffOutlined,
-  SwapOutlined,
-  TeamOutlined,
-  SettingOutlined,
-  DashboardOutlined,
-  FireOutlined,
-  BulbOutlined,
-  CommentOutlined,
-  SoundOutlined,
-  WalletOutlined,
-  GiftOutlined,
-  AndroidOutlined,
-  GlobalOutlined,  // Import icon for language
-} from "@ant-design/icons";
+import { ApiOutlined, PoweroffOutlined, SwapOutlined, TeamOutlined, SettingOutlined, DashboardOutlined, FireOutlined, BulbOutlined, CommentOutlined, SoundOutlined, WalletOutlined, GiftOutlined, AndroidOutlined, GlobalOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { useHistory, useLocation } from "react-router-dom";
 import './index.css';
@@ -24,8 +9,9 @@ import { MenuInfo } from "rc-menu/lib/interface";
 import { useAuthContext } from "context/auth-context";
 import { useDispatch, useSelector } from "react-redux";
 import { rangerConnectFetch, selectUser } from "modules";
-import { User } from "API";
+import {  User } from "API";
 import { getCsrfToken } from "helpers";
+ 
 
 interface Props {
   children: React.ReactNode;
@@ -39,7 +25,7 @@ export default function MainLayout({ children }: Props) {
   const selectUsers: User = useSelector(selectUser);
   const { authorized, setUid, setRole, logoutUser, loginUser } = useAuthContext();
   const dispatch = useDispatch();
-  const [selectedLanguage, setSelectedLanguage] = useState<string>('English');  // State for selected language
+  const [  selectedLanguage, setSelectedLanguage  ] = useState<string>('English');  // State for selected language
 
   useEffect(() => {
     dispatch(rangerConnectFetch({ withAuth: false }) as any);
@@ -58,13 +44,16 @@ export default function MainLayout({ children }: Props) {
     }
   }, [loginUser, selectUsers]);
 
+ 
+
+
   const menuItems = [
     { key: Routes.Dashboard, icon: <DashboardOutlined />, label: t("setter.header.tabs.dashboard") },
     { key: Routes.Users, icon: <TeamOutlined />, label: t("setter.header.tabs.users") },
     { key: Routes.Operations, icon: <SwapOutlined className="h-6" />, label: t("setter.header.tabs.operations") },
     { key: Routes.Configuration, icon: <SettingOutlined />, label: t("setter.header.tabs.configuration") },
     { key: Routes.Restrictions, icon: <ApiOutlined />, label: t("setter.header.tabs.devops") },
-    { key: "/chat", icon: <CommentOutlined />, label: t("setter.header.tabs.chats") },
+    { key: Routes.chat, icon: <CommentOutlined />, label: t("setter.header.tabs.chats") },
     { key: "/", icon: <SoundOutlined />, label: t("setter.header.tabs.notification") },
     { key: Routes.Wallets, icon: <WalletOutlined />, label: t("setter.header.tabs.wallet") },
     { key: "/", icon: <GiftOutlined />, label: t("setter.header.tabs.redpack") },
@@ -85,7 +74,7 @@ export default function MainLayout({ children }: Props) {
 
   // Language menu for dropdown
   const languageMenu = (
-    <Menu>
+    <Menu >
       <Menu.Item key="en" onClick={() => handleLanguageChange("en", "English")}>
         English
       </Menu.Item>
@@ -107,7 +96,7 @@ export default function MainLayout({ children }: Props) {
       {/* Add more languages here as needed */}
     </Menu>
   );
-  
+
 
   return (
     <Layout className="setter-main-container">
@@ -150,7 +139,7 @@ export default function MainLayout({ children }: Props) {
       )}
       <Layout>{children}</Layout>
       <Footer className="setter-main-footer">
-        Powered by <a href="https://www.tunex.io">TuneX LLC</a> and <a href="https://digital-magic.io">Digital Magic Ltd</a>
+        Powered by <a href={`${window.location}`}>Md Rijon Hossain Jibon YT</a>
       </Footer>
     </Layout>
   );

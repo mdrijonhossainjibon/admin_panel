@@ -52,6 +52,8 @@ export type RouteParams<T extends object> = { [key in keyof T]: string };
 export const Routes = createRoutes({
   //DASHBOARD ROUTES START
   Dashboard: createRoute("/setter/internal/dashboard"),
+  chat: createRoute("/setter/internal/live/chat"),
+  InternalServerError : createRoute("/setter/internal/server/error"),
   //DASHBOARD ROUTES END
 
   //USERS ROUTES START

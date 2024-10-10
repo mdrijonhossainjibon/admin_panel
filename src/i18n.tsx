@@ -22,7 +22,7 @@ i18n
     fallbackLng: 'en',
     debug: true,
     nonExplicitSupportedLngs: true,
-    supportedLngs: ['en', 'bn'], 
+    supportedLngs: ['en', 'bn', 'hi'], 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },

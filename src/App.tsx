@@ -19,7 +19,8 @@ const ComponentMail = lazy(() => import('components/page/auth/Email'))
 const ComponentEmail_Verified = lazy(() => import('components/page/auth/Email_Verified'));
 const Suspended = lazy(() => import('components/page/auth/Suspended'))
 const Access_Restricted = lazy(() => import('components/page/auth/Access_Restricted'))
-const Maintenance = lazy(() => import('components/page/auth/Maintenance'))
+const Maintenance = lazy(() => import('components/page/auth/Maintenance'));
+const InternalServerError  = lazy(() => import('components/InternalServerError'));
 function App() {
   return (
     <Router>
@@ -36,12 +37,13 @@ function App() {
                 <PrivateRoute path={Routes.Configuration} component={ConfigurationsLayouts} />
                 <PrivateRoute path={Routes.Operations} component={operations} />
                 <PrivateRoute path={Routes.Devops} component={devOps} />
-                <PrivateRoute path={'/chat'} component={chat} />
+                <PrivateRoute path={Routes.chat} component={chat} />
                 <PublicRoute path={'/email/verify'} component={ComponentMail} />
                 <PublicRoute path={Routes.Emailverification} component={ComponentEmail_Verified} />
                 <PublicRoute path={'/suspended'} component={Suspended} />
                 <PublicRoute path={'/access_restricted'} component={Access_Restricted} />
                 <PublicRoute path={'/maintenance'} component={Maintenance} />
+                 <PublicRoute path={ Routes.InternalServerError }   component={ InternalServerError  }  />
                 <Redirect to={Routes.Dashboard} />
               </Switch>
             </MainLayout>

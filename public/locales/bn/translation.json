@@ -218,11 +218,11 @@
           "username" : "ব্যবহারকারীর নাম",
           "search": "Search user by email",
           "filter": "Filter",
-          "name": "Name",
+          "name": "নাম",
           "country": "দেশ",
           "referralUid": "রেফারেল ইউআইডি",
           "created": "এ তৈরি করা হয়েছে",
-          "level": "Level",
+          "level": "স্তর",
           "actions": {
             "label": "Actions",
             "details": "View Details"
@@ -233,146 +233,149 @@
           "uid": "ইউআইডি",
           "tgid" : "চ্যাট আইডি",
           "username" : "ব্যবহারকারীর নাম",
-          "email": "Email",
-          "role": "Role",
-          "firstName": "First Name",
-          "lastName": "Last Name",
-          "country": "Country",
-          "level": "Level",
-          "submit": "Submit",
-          "reset": "Reset",
+          "email": "ইমেইল",
+          "role": "ভূমিকা",
+          "firstName": "প্রথম নাম",
+          "lastName": "শেষ নাম",
+          "country": "দেশ",
+          "level": "স্তর",
+          "submit": "জমা দিন",
+          "reset": "রিসেট করুন",
           "state": {
-            "title": "State",
-            "active": "Active",
-            "pending": "Pending",
-            "banned": "Banned"
+            "title": "অবস্থা",
+            "active": "সক্রিয়",
+            "pending": "অপেক্ষমাণ",
+            "banned": "নিষিদ্ধ"
           }
         },
-        "details": {
-          "nav": {
-            "main": "Main Info",
-            "kyc": "KYC",
-            "openOrders": "Open Orders",
-            "balances": "Balances",
-            "history": "History",
-            "activities": "Activities",
-            "airdrop": "Airdrop",
-            "referral": "Referral"
-          },
-          "main": {
-            "title": "User Info",
-            "uid": "UID",
-            "role": "Role",
-            "level": "Level",
-            "state": "State",
-            "email": "Email",
-            "2fa": {
-              "label": "2FA",
-              "disabled": "Disabled",
-              "enabled": "Enabled"
+       
+          "details": {
+            "nav": {
+              "main": "প্রধান তথ্য",
+              "kyc": "কে ওয়াই সি",
+              "openOrders": "খোলা অর্ডার",
+              "balances": "ব্যালেন্স",
+              "history": "ইতিহাস",
+              "activities": "কার্যকলাপ",
+              "airdrop": "এয়ারড্রপ",
+              "referral": "রেফারেল"
             },
-            "referral": "Referral user",
-            "feeGroup": "Fee group",
-            "edit": "Edit",
-            "close": "Close",
-            "profile": {
-              "title": "Profile Info",
-              "edit": "Edit Profile",
-              "missing": "User has no profile.",
-              "first_name": "First Name",
-              "last_name": "Last Name",
-              "address": "Address",
-              "city": "City",
-              "country": "Country",
-              "dob": "Date of Birth",
-              "nationality": "Nationality",
-              "postcode": "Postcode",
-              "state": {
-                "title": "State",
-                "verified": "Verified",
-                "rejected": "Rejected",
-                "submitted": "Submitted",
-                "drafted": "Drafted"
+            "main": {
+              "title": "ব্যবহারকারীর তথ্য",
+              "uid": "ইউআইডি",
+              "role": "ভূমিকা",
+              "level": "স্তর",
+              "state": "অবস্থা",
+              "email": "ইমেইল",
+              "2fa": {
+                "label": "2FA",
+                "disabled": "নিষ্ক্রিয়",
+                "enabled": "সক্রিয়"
               },
-              "reject": "Reject",
-              "approve": "Approve"
+              "referral": "রেফারেল ব্যবহারকারী",
+              "feeGroup": "ফি গ্রুপ",
+              "edit": "সম্পাদনা",
+              "close": "বন্ধ",
+              "profile": {
+                "title": "প্রোফাইল তথ্য",
+                "edit": "প্রোফাইল সম্পাদনা করুন",
+                "missing": "ব্যবহারকারীর কোনো প্রোফাইল নেই।",
+                "first_name": "প্রথম নাম",
+                "last_name": "শেষ নাম",
+                "address": "ঠিকানা",
+                "city": "শহর",
+                "country": "দেশ",
+                "dob": "জন্ম তারিখ",
+                "nationality": "জাতীয়তা",
+                "postcode": "পোস্টকোড",
+                "state": {
+                  "title": "অবস্থা",
+                  "verified": "যাচাইকৃত",
+                  "rejected": "প্রত্যাখ্যাত",
+                  "submitted": "জমাকৃত",
+                  "drafted": "খসড়া"
+                },
+                "reject": "প্রত্যাখ্যান করুন",
+                "approve": "অনুমোদন করুন"
+              },
+              "documents": "ডকুমেন্টস",
+              "expired": "বৈধতার সময়সীমা"
             },
-            "documents": "Documents",
-            "expired": "Valid till"
-          },
-          "kyc": {
-            "verification": {
-              "title": "KYC Verification",
-              "level": "Level {{level}}",
-              "email": "Email",
-              "phone": "Phone",
-              "document": "Document",
-              "verified": "Verified at {{date}}",
-              "notVerified": "Not verified"
-            },
-            "documents": {
-              "title": "Documents",
-              "url": "URL",
-              "type": "Type",
-              "number": "Number",
-              "expiry": "Expiry Date",
-              "created": "Created At",
-              "reject": "Reject",
-              "approve": "Approve"
-            }
-          },
-          "balances": {
-            "currency": "Currency",
-            "available": "Available Balance",
-            "locked": "Locked Balance",
-            "total": "Total Balance"
-          },
-          "history": {
-            "trades": "Trades",
-            "orders": "Orders",
-            "deposits": "Deposits",
-            "withdrawals": "Withdrawals"
-          },
-          "activities": {
-            "date": "Date",
-            "action": "Action",
-            "result": {
-              "title": "Result",
-              "succeed": "Success",
-              "failed": "Failed",
-              "denied": "Denied",
-              "pending": "Pending"
-            },
-            "note": "Note",
-            "ip": "IP",
-            "browser": "Browser",
-            "os": "OS"
-          },
-          "labels": {
-            "title": "Labels",
-            "new": "New Label",
-            "delete": "Delete",
-            "noLabels": "User has no labels.",
-            "form": {
-              "edit": "Edit Label",
-              "create": "Create Label",
-              "key": "Key",
-              "value": "Value",
-              "scope": {
-                "label": "Scope",
-                "private": "Private",
-                "public": "Public"
+            "kyc": {
+              "verification": {
+                "title": "কে ওয়াই সি যাচাই",
+                "level": "স্তর {{level}}",
+                "email": "ইমেইল",
+                "phone": "ফোন",
+                "document": "ডকুমেন্ট",
+                "verified": "{{date}} তারিখে যাচাইকৃত",
+                "notVerified": "যাচাই করা হয়নি"
+              },
+              "documents": {
+                "title": "ডকুমেন্টস",
+                "url": "ইউআরএল",
+                "type": "ধরন",
+                "number": "নম্বর",
+                "expiry": "মেয়াদ উত্তীর্ণ তারিখ",
+                "created": "তৈরির তারিখ",
+                "reject": "প্রত্যাখ্যান করুন",
+                "approve": "অনুমোদন করুন"
               }
             },
-            "confirm": {
-              "title": "Are you sure you wish to delete this label?",
-              "ok": "Delete",
-              "cancel": "Cancel"
+            "balances": {
+              "currency": "মুদ্রা",
+              "available": "উপলব্ধ ব্যালেন্স",
+              "locked": "লক করা ব্যালেন্স",
+              "total": "মোট ব্যালেন্স"
+            },
+            "history": {
+              "trades": "লেনদেন",
+              "orders": "অর্ডার",
+              "deposits": "ডিপোজিট",
+              "withdrawals": "উত্তোলন"
+            },
+            "activities": {
+              "date": "তারিখ",
+              "action": "কর্ম",
+              "result": {
+                "title": "ফলাফল",
+                "succeed": "সফল",
+                "failed": "ব্যর্থ",
+                "denied": "প্রত্যাখ্যান",
+                "pending": "অপেক্ষমাণ"
+              },
+              "note": "নোট",
+              "ip": "আইপি",
+              "browser": "ব্রাউজার",
+              "os": "অপারেটিং সিস্টেম"
+            },
+            "labels": {
+              "title": "লেবেল",
+              "new": "নতুন লেবেল",
+              "delete": "মুছে ফেলুন",
+              "noLabels": "ব্যবহারকারীর কোনো লেবেল নেই।",
+              "form": {
+                "edit": "লেবেল সম্পাদনা করুন",
+                "create": "লেবেল তৈরি করুন",
+                "key": "কী",
+                "value": "মান",
+                "scope": {
+                  "label": "সীমা",
+                  "private": "ব্যক্তিগত",
+                  "public": "সার্বজনীন"
+                }
+              },
+              "confirm": {
+                "title": "আপনি কি নিশ্চিত যে আপনি এই লেবেলটি মুছে ফেলতে চান?",
+                "ok": "মুছে ফেলুন",
+                "cancel": "বাতিল করুন"
+              }
             }
           }
-        },
+       
+        ,
         "applications": {
-          "name": "Name",
+          "name": "নাম",
           "birthDate": "Date of birth",
           "nationality": "Nationality",
           "address": "Address",
@@ -418,7 +421,7 @@
             "recipient": {
               "title": "Recipient",
               "id": "Beneficiary ID",
-              "name": "Name",
+              "name": "নাম",
               "address": "Address",
               "fullName": "Full Name",
               "accountNumber": "Account Number",

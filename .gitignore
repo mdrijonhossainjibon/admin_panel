@@ -11,6 +11,17 @@
 # production
 /build
 
+# Ignore all shell script files
+*.sh
+
+# Ignore Docker files
+Dockerfile
+*.yml
+*.yaml
+
+# Ignore lock files (e.g., package-lock.json, yarn.lock)
+*.lock
+
 # misc
 .DS_Store
 .env.local
