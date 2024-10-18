@@ -4,13 +4,14 @@ import { RANGER_CONNECT_DATA, RANGER_CONNECT_FETCH, RANGER_DIRECT_WRITE, RANGER_
 import { generateSocketURI, streamsBuilder } from "../helpers";
 import { Channel, eventChannel, Task } from "redux-saga";
 import { alertPush, signInFailure, signInSuccess } from "modules";
+import { defaultConfig } from "API/confing";
 
 interface RangerBuffer {
     messages: object[];
 }
 
 const initRanger = ({ withAuth }: RangerConnectFetch['payload'], prevSubs: string[], buffer: RangerBuffer) => {
-    const baseUrl =`wss://streem.mdrijonhossainjibonyt.xyz`;
+    const baseUrl = defaultConfig.api.rangerUrl;
     const streams = streamsBuilder(withAuth, prevSubs);
     const ws = new WebSocket(generateSocketURI(baseUrl, streams));
 

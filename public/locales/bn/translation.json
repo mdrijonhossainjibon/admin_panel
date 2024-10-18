@@ -4,17 +4,17 @@
       "signUp": {
         "password": {
           "message": {
-            "error": "Password must contain at least 8 characters, at least one capital letter and one digit"
+            "error": "পাসওয়ার্ডে কমপক্ষে 8টি অক্ষর, কমপক্ষে একটি বড় অক্ষর এবং একটি সংখ্যা থাকতে হবে"
           }
         }
       }
       ,
-      "tabs" : {  "chats" : "Chats" }
+      "tabs" : {  "chats" : "চ্যাট" }
     }
   },
   "identity": {
     "password": {
-      "user_doesnt_exist": "User doesn't exist"
+      "user_doesnt_exist": "ব্যবহারকারীর অস্তিত্ব নেই"
     },
     "user_doesnt_exist": "ব্যবহারকারী বিদ্যমান নয়",
     "session": {

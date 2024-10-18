@@ -221,7 +221,8 @@
           "level": "Level",
           "actions": {
             "label": "Actions",
-            "details": "View Details"
+            "details": "View Details",
+            "actions" : "Actions"
           },
           "attachments": "Attachments"
         },

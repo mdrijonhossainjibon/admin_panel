@@ -17,6 +17,31 @@ interface Props {
   children: React.ReactNode;
 }
 
+interface TelegramUser {
+  id: number;
+  first_name: string;
+  last_name?: string;
+  username?: string;
+  language_code?: string;
+}
+
+interface TelegramWebApp {
+  initData: string;
+  initDataUnsafe: {
+    user: TelegramUser;
+    query_id: string;
+    auth_date: number;
+    hash: string;
+  };
+  close: () => void;
+}
+
+interface Window {
+  Telegram: {
+    WebApp: TelegramWebApp;
+  };
+}
+
 export default function MainLayout({ children }: Props) {
   const { Footer, Header } = Layout;
   const { t, i18n } = useTranslation();  // Access i18n for language change
@@ -45,7 +70,19 @@ export default function MainLayout({ children }: Props) {
   }, [loginUser, selectUsers]);
 
  
+  if (window.Telegram && window.Telegram.WebApp) {
+    const { WebApp } = window.Telegram;
 
+    // Access the initialization data and set the user
+    const initData = WebApp.initDataUnsafe;
+  
+
+    // Get URL parameters (query string)
+    const urlParams = new URLSearchParams(window.location.search);
+    console.log(urlParams);
+    console.log(initData)
+   
+  }
 
   const menuItems = [
     { key: Routes.Dashboard, icon: <DashboardOutlined />, label: t("setter.header.tabs.dashboard") },

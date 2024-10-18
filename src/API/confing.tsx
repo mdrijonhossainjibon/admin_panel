@@ -16,7 +16,7 @@ export const defaultConfig: Config = {
 		authUrl: 'https://api.mdrijonhossainjibonyt.xyz/api/v2/barong',
 		tradeUrl: 'https://api.mdrijonhossainjibonyt.xyz/api/v2/',
 		applogicUrl: 'https://api.mdrijonhossainjibonyt.xyz/api/v2/applogic',
-		rangerUrl: `wss://9003-mdrijonhossai-tradingui-izwvgfxqte6.ws-us106.gitpod.io/api/v2/ranger`,
+		rangerUrl: `wss://streem.mdrijonhossainjibonyt.xyz`,
 		holderUrl: '/api/v2/holder',
 		transactionUrl: '/api/v2/transaction',
 		statisticUrl: '/api/v2/statistic',
